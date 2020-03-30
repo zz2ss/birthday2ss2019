@@ -28,7 +28,7 @@ function choiceThing(things){
     }
 }
 
-axios.get("_config.json").then(
+axios.get("config.json").then(
     function(res){
         var data = res.data
         var num_thing = choiceThing(data.things)
