@@ -1,0 +1,63 @@
+html,
+body {
+    background-color: #f7f6f6;
+    height: 100%;
+}
+
+.card-area {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    background-color: white;
+    height: 80%;
+    margin-top: 20%;
+    padding: 20px 20px;
+    position: relative;
+}
+
+.show-photo {
+    width: 75%;
+    margin: 30px auto;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.title {
+    font-size: 22px;
+}
+
+.number {
+    background-color: #4c4c4c;
+    color: white;
+    padding: 0px 4px;
+}
+
+.thing {
+    margin-top: 40px;
+    line-height: 27px;
+    font-family: SimSun;
+}
+
+.author {
+    position: absolute;
+    font-size: 10px;
+    margin: auto;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.blessing {
+    position: absolute;
+    right: 2px;
+    top: 20%;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    color: #eeeeee;
+    font-weight: 300;
+    font-size: 18px;
+}
