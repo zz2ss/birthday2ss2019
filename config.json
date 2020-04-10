@@ -3,7 +3,9 @@
     "title": "我和莎莎的100件事",
     "author": "zz2ss",
     "blessing": "HAPPYBIRTHDAY",
-    "show_photo": "http://assest.iaoe.xyz/zz2ss/20200410112743.png",
+    "default":{
+	"show_photo": "http://assest.iaoe.xyz/zz2ss/20200410112743.png"
+    },
     "things": [
     	{
             "thing":"莎莎喜欢的电视剧是《请回答1988》— 小本本",
