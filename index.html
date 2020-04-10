@@ -18,16 +18,27 @@
 <body>
 	<div class="container-fluid full-height" id="app">
 		<div class="row card-area full-height">
-			<div class="col-xs-10 card">
+			<div class="col-xs-10 col-md-3 card">
 				<div class="title">{{ title }}</div>
-				<span class="number">{{ num }}</span>
-				<img v-bind:src="show_photo" class="img-circle img-responsive show-photo">
-				<div class="thing">{{ thing }}</div>
+				<span class="number">{{ thing.num }}</span>
+				<div class="img-box">
+					<div class="show-photo img-circle" v-bind:style="{background: thing.show_photo}"></div>
+				</div>
+				<div class="text-box">
+					<div class="thing">{{ thing.thing }}</div>
+				</div>
 				<div v-if="author" class="author">- {{author}} -</div>
 				<div v-if="blessing" class="blessing">{{ blessing }}}</div>
+				<div class="next-thing thing-button">
+					<img v-on:click="nextThing" class="nextImg" src="source/static/icon/next.png">
+				</div>
+				<div class="pre-thing thing-button">
+					<img v-on:click="preThing" class="nextImg" src="source/static/icon/next.png">
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <script src="source/js/100things.js"></script>
+
 </html>

@@ -16,33 +16,76 @@ function num2bigNum(num) {
     }
 }
 
-function choiceThing(things){
-    if(things==null || things.length==0){
-        return {}
-    }else{
-        var num = parseInt(Math.random()*things.length)
-        return {
-            num:num2bigNum(num+1),
-            thing:things[num]
+class Things{
+    constructor(config){
+        this.things = config.things
+        this.default = config.default
+        this.index = 0
+    }
+
+    getThing(index){
+        let things = this.things
+        if(things!=null && things.length>0 && index>=0 && index<things.length){
+            let thing= things[index].thing?things[index].thing:things[index]
+            let photo_url = things[index].show_photo?things[index].show_photo:this.default.show_photo
+            return {
+                num: num2bigNum(index+1),
+                thing: thing,
+                show_photo: 'url(\''+ photo_url + '\') center/cover no-repeat'
+            }
+        }else{
+            return {
+                num: 0,
+                thing: "配置文件出现问题",
+                show_photo: this.default.show_photo
+            }
         }
+    }
+
+    nextThing(){
+        this.index = (this.index+this.things.length+1)%this.things.length
+        return this.getThing(this.index)
+    }
+
+    preThing(){
+        this.index = (this.index+this.things.length-1)%this.things.length
+        return this.getThing(this.index)
+    }
+
+    randomThing(){
+        this.index =parseInt(Math.random*this.things.length)
+        return this.getThing(this.index)
     }
 }
 
-axios.get("config.json").then(
-    function(res){
-        var data = res.data
-        var num_thing = choiceThing(data.things)
-        document.title=res.data.html_title?res.data.html_title:"100 Things"
-        var app = new Vue({
-            el: "#app",
-            data:{
-                title:data.title,
-                num:num_thing.num,
-                thing:num_thing.thing,
-                author:data.author,
-                blessing:data.blessing,
-                show_photo:data.show_photo
-            }
-        })
-    }
-)
+function init(){
+    axios.get("config.json").then(
+        function(res){
+            var config = res.data
+            document.title=config.html_title?config.html_title:"100 Things"
+            let things = new Things(config)
+            var app = new Vue({
+                el: "#app", 
+                data: {
+                    title: config.title,
+                    author: config.author,
+                    blessing: config.blessing,
+                    thing: things.getThing(0),
+                },
+                methods: {
+                    nextThing: function(){
+                        this.thing = things.nextThing()
+                    },
+                    preThing: function(){
+                        this.thing = things.preThing()
+                    },
+                    randomThing: function(){
+                        this.thing = things.preThing()
+                    },
+                },
+            })
+        }
+    )
+}
+
+init()
